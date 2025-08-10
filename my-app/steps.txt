@@ -1,0 +1,70 @@
+1. Add credentials in Jenkins (Git & Sonar token)
+Manage Jenkins → Credentials → (Global) → Add Credentials:
+
+Git credential
+
+Kind: Username with password (or SSH Username with private key if using SSH)
+
+Username: your GitHub username (or git for deploy key)
+
+Password: your GitHub Personal Access Token (recommended) or password
+
+ID: git-cred-demo (or leave blank and Jenkins generates an id)
+
+2. Generate a Token
+After creating the project, SonarQube will ask for an Authentication Token.
+
+Click Generate Token.
+
+Give a name (example: sonar-token).
+
+Choose No Expiry or set expiry if needed.
+
+Click Generate → Copy the token somewhere safe (you can’t see it again later).
+
+
+
+
+2.Create a Project in SonarQube
+
+Click "Projects" → "Create Project".
+
+Choose "Manually" (not from CI/CD yet).
+
+Give a Project Key (example: my-sample-project).
+
+Click Set Up.
+
+sonar-token: sqp_fcaedb5f3a0f63798154899e8ed48ff25f0e390a
+
+
+
+
+3. Add Token in Jenkins
+Open Jenkins Dashboard → Manage Jenkins → Credentials.
+
+Click (global) → Add Credentials.
+
+For Kind, choose Secret Text.
+
+Secret: Paste your SonarQube token.
+
+ID: Give sonar-token (same as you will use in Jenkinsfile or job).
+
+Save.
+
+
+
+Pending.....:
+4. Configure SonarQube in Jenkins
+Go to Manage Jenkins → Configure System.
+
+Scroll to SonarQube Servers → Add.
+
+Name: MySonarQube (you’ll reference this name in jobs).
+
+Server URL: http://localhost:9000 (or your server URL).
+
+Server authentication token: Select the one you created (sonar-token).
+
+Save.
